@@ -1,22 +1,39 @@
-<script src="n64wasm.js"></script>
-<script src="script.js"></script>
-<script>
-  window.onload = function() {
-    fetch('roms/SuperMario64.z64')
-      .then(response => response.arrayBuffer())
-      .then(buffer => {
-        // Mount the ROM into the Emscripten virtual filesystem
-        Module.FS_createDataFile('/', 'SuperMario64.z64', new Uint8Array(buffer), true, false);
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>N64 Wasm - Web</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- load your wasm wrapper here -->
+  <script src="n64wasm.js"></script>
+</head>
+<body>
+  <header>
+    <h1>N64 Web Emulator</h1>
+    <div class="controls">
+      <select id="romSelect">
+        <option value="roms/mario64.z64">Super Mario 64</option>
+      </select>
+      <button id="loadBtn">Load ROM</button>
+      <button id="mobileBtn">Mobile</button>
+      <button id="saveBtn">Save State</button>
+      <button id="loadStateBtn">Load State</button>
+      <span id="status">Ready</span>
+    </div>
+  </header>
 
-        // Start the emulator (change the function name if yours is different)
-        if (typeof startEmulator === 'function') {
-          startEmulator('SuperMario64.z64');
-        } else if (typeof Module.callMain === 'function') {
-          Module.callMain(['SuperMario64.z64']);
-        } else {
-          console.error('No start function found for the emulator.');
-        }
-      })
-      .catch(err => console.error('Failed to load ROM:', err));
-  };
-</script>
+  <main>
+    <div id="canvasWrap">
+      <!-- The emulator should render into this canvas if the wasm module supports it -->
+      <canvas id="screen" width="640" height="480"></canvas>
+    </div>
+  </main>
+
+  <footer>
+    <small>Drop ROMs into <code>/roms/</code> and update the selector.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
