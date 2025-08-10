@@ -1,0 +1,17 @@
+:root{
+  --bg:#111;
+  --panel:#1f1f1f;
+  --accent:#0b84ff;
+  --text:#eee;
+}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+header{padding:18px;text-align:center}
+h1{margin:0 0 8px 0}
+.controls{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap}
+.controls select, .controls button{padding:8px 10px;border-radius:6px;border:1px solid #333;background:#222;color:var(--text);cursor:pointer}
+.controls button:hover{box-shadow:0 0 0 3px rgba(11,132,255,0.08)}
+#status{margin-left:12px;font-size:0.95rem;color:#ddd}
+#canvasWrap{display:flex;justify-content:center;padding:24px}
+canvas{background:#000;border:2px solid #444;max-width:100%;height:auto}
+.mobile-mode canvas{width:100% !important;height:auto !important}
+footer{padding:12px;text-align:center;color:#999}
